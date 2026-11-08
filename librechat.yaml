@@ -109,12 +109,10 @@ endpoints:
       baseURL: 'https://midas-stage.telkomdigital.id/karpathy'
       models:
         default:
-          - 'anthropic/claude-sonnet-4.5'
-          - 'openai/gpt-5'
-          - 'google/gemini-3.8-flash'
+          - 'midas/gpt-5.5'
         fetch: false
       titleConvo: true
-      titleModel: 'openai/gpt-5-nano'
+      titleModel: 'midas/gpt-5.5'
       modelDisplayLabel: 'Midas Gateway'
 
 # ---------------------------------------------------------------------------
@@ -129,7 +127,7 @@ modelSpecs:
       showOnLanding: true
       preset:
         endpoint: 'AI Gateway'
-        model: 'anthropic/claude-sonnet-4.5'
+        model: 'midas/gpt-5.5'
         useResponsesApi: true
         instructions: |
           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
@@ -141,7 +139,7 @@ modelSpecs:
       showOnLanding: true
       preset:
         endpoint: 'AI Gateway'
-        model: 'google/gemini-3.8-flash'
+        model: 'midas/gpt-5.5'
         useResponsesApi: true
         instructions: |
           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.

@@ -291,10 +291,7 @@ Responses API di `https://midas-stage.telkomdigital.id/karpathy/responses`.
 LibreChat menambahkan `/responses` pada base URL `/karpathy`; model preset
 mengaktifkan `useResponsesApi` dan katalog model dikonfigurasi secara lokal:
 
-- `anthropic/claude-sonnet-4.5`
-- `openai/gpt-5`
-- `openai/gpt-5-nano`
-- `google/gemini-3.8-flash`
+- `midas/gpt-5.5`
 
 Pastikan key yang disimpan pada `AI_GATEWAY_API_KEY` diterbitkan untuk Midas
 Gateway dan memiliki akses ke model yang dipilih.
