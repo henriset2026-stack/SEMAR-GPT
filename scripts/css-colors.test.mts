@@ -1,6 +1,9 @@
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { findCssColorLiterals } from './css-colors.mts';
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { findCssColorLiterals, scanCssColors } from './css-colors.mts';
 
 const literals = (css: string): string[] => findCssColorLiterals(css).map(({ literal }) => literal);
 
@@ -286,4 +289,18 @@ test('reads percentage channels and triplets inside a var() fallback', () => {
     'VAR(--configured, 255 0 0)',
   ]);
   assert.deepEqual(literals('a { --offset: 0 1px 2px; --size: 1.5rem 2rem 3rem; }'), []);
+});
+
+test('a whole-file exemption skips its stylesheet but not its neighbours', () => {
+  const root = mkdtempSync(join(tmpdir(), 'css-colors-'));
+  for (const directory of [
+    'client/src/components/Landing',
+    'packages/client/src',
+    'packages/chat/src',
+  ]) {
+    mkdirSync(join(root, directory), { recursive: true });
+  }
+  writeFileSync(join(root, 'client/src/components/Landing/landing.css'), 'a { color: #fff; }');
+  writeFileSync(join(root, 'client/src/components/Landing/other.css'), 'a { color: #000; }');
+  assert.deepEqual(scanCssColors(root), ['client/src/components/Landing/other.css:1 #000']);
 });

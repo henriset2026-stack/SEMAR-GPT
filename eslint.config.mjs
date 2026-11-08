@@ -367,6 +367,17 @@ export default [
     },
   },
   {
+    // The public landing page is a bespoke marketing surface with its own scoped stylesheet
+    // (`landing.css`), not an in-app theme surface. Its `semar-*` classes and dialog styling are
+    // therefore outside the design-system grammar; the stylesheet itself is reviewed by the CSS
+    // colour gate.
+    files: ['client/src/components/Landing/**/*.{ts,tsx}'],
+    rules: {
+      'shadcn/no-unknown-classes': 'off',
+      'shadcn/no-restyle': 'off',
+    },
+  },
+  {
     // A spec asserts the class strings a control renders; it composes nothing a theme paints.
     files: [
       'client/src/**/*.{spec,test}.{ts,tsx,js,jsx}',

@@ -18,11 +18,16 @@ export interface CssColorFinding {
 
 export const CSS_ROOTS = ['client/src', 'packages/client/src', 'packages/chat/src'];
 
-/** Theme token sources (allowlist.md entry 1): their custom property declarations may hold a literal or a channel triplet. */
+/** Theme token sources (allowlist.md entry 1): their custom properties may hold a literal or a
+ *  channel triplet. Every other declaration in them is still checked. */
 export const CSS_COLOR_ALLOWED_FILES = [
   'packages/client/src/theme/defaults.css',
   'packages/client/src/theme/tokens.css',
 ];
+
+/** Stylesheets whose whole palette is fixed by design (allowlist.md entry 10): the public landing
+ *  page must look the same for every visitor, so it cannot read the signed-in app theme's roles. */
+export const CSS_COLOR_ALLOWED_WHOLE_FILES = ['client/src/components/Landing/landing.css'];
 
 /** Rules that may hold a literal in an otherwise checked file: the Azure brand gradient (entry 2) and the select arrow's inline SVG (entry 9). */
 export interface AllowedRule {
@@ -282,13 +287,14 @@ function listCssFiles(directory: string): string[] {
 export function scanCssColors(root: string): string[] {
   return CSS_ROOTS.flatMap((directory) => listCssFiles(join(root, directory)))
     .map((path) => relative(root, path).split('\\').join('/'))
-    .flatMap((path) =>
-      findCssColorLiterals(
+    .flatMap((path) => {
+      if (CSS_COLOR_ALLOWED_WHOLE_FILES.includes(path)) return [];
+      return findCssColorLiterals(
         readFileSync(join(root, path), 'utf8'),
         CSS_COLOR_ALLOWED_RULES[path],
         CSS_COLOR_ALLOWED_FILES.includes(path),
-      ).map(({ line, literal }) => `${path}:${line} ${literal}`),
-    );
+      ).map(({ line, literal }) => `${path}:${line} ${literal}`);
+    });
 }
 
 /** `node scripts/css-colors.mts`: prints each finding and exits 1 when there is one. */
@@ -303,7 +309,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
       'Use a theme variable, for example rgb(var(--black) / 0.1), instead of a colour literal.',
     );
     console.error(
-      `Only ${CSS_COLOR_ALLOWED_FILES.join(', ')} and ${rules} may hold one; see packages/client/src/theme/allowlist.md.`,
+      `Only ${[...CSS_COLOR_ALLOWED_FILES, ...CSS_COLOR_ALLOWED_WHOLE_FILES].join(', ')} and ${rules} may hold one; see packages/client/src/theme/allowlist.md.`,
     );
     process.exit(1);
   }

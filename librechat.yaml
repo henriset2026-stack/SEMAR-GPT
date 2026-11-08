@@ -95,40 +95,54 @@ interface:
   mascot: false
 
 # ---------------------------------------------------------------------------
-# Connect SEMAR-GPT to an OpenAI-compatible model gateway
+# Model gateway
 # ---------------------------------------------------------------------------
-# Uncomment the block below and set SEMAR_API_BASE_URL / SEMAR_API_KEY in `.env`.
-# The endpoint accepts any OpenAI-compatible server (vLLM, Ollama, LiteLLM,
-# OpenRouter, an internal gateway, ...).
+# Vercel AI Gateway exposes OpenAI, Anthropic, Google and other providers
+# through one OpenAI-compatible API. Set AI_GATEWAY_API_KEY in the API
+# environment (Railway) and the endpoint below becomes available.
 #
-# endpoints:
-#   custom:
-#     - name: 'SEMAR'
-#       apiKey: '${SEMAR_API_KEY}'
-#       baseURL: '${SEMAR_API_BASE_URL}'
-#       models:
-#         default: ['semar-1']
-#         fetch: false
-#       titleConvo: true
-#       titleModel: 'semar-1'
-#       modelDisplayLabel: 'SEMAR-GPT'
+# Any other OpenAI-compatible server (vLLM, Ollama, LiteLLM, OpenRouter, an
+# internal gateway, ...) can be added the same way.
+endpoints:
+  custom:
+    - name: 'AI Gateway'
+      apiKey: '${AI_GATEWAY_API_KEY}'
+      baseURL: 'https://ai-gateway.vercel.sh/v1'
+      models:
+        default:
+          - 'anthropic/claude-sonnet-4.5'
+          - 'openai/gpt-5'
+          - 'google/gemini-3.8-flash'
+        fetch: true
+      titleConvo: true
+      titleModel: 'openai/gpt-5-nano'
+      modelDisplayLabel: 'Vercel AI Gateway'
 
 # ---------------------------------------------------------------------------
-# Optional: expose a branded model preset on the welcome screen
+# Branded presets on the welcome screen
 # ---------------------------------------------------------------------------
-# Requires OPENAI_API_KEY (or another configured endpoint) in `.env`.
-#
-# modelSpecs:
-#   prioritize: true
-#   list:
-#     - name: 'semar-gpt'
-#       label: 'SEMAR-GPT'
-#       description: 'Asisten AI serbaguna untuk menulis, menganalisis, dan berkarya.'
-#       showOnLanding: true
-#       preset:
-#         endpoint: 'openAI'
-#         model: 'gpt-4o-mini'
-#         instructions: |
-#           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
-#           Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan
-#           demikian dan tawarkan langkah berikutnya. Jangan mengarang fakta.
+modelSpecs:
+  prioritize: true
+  list:
+    - name: 'semar-gpt'
+      label: 'SEMAR-GPT'
+      description: 'Asisten AI serbaguna untuk menulis, menganalisis, dan berkarya.'
+      showOnLanding: true
+      preset:
+        endpoint: 'AI Gateway'
+        model: 'anthropic/claude-sonnet-4.5'
+        instructions: |
+          Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
+          Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan
+          demikian dan tawarkan langkah berikutnya. Jangan mengarang fakta.
+    - name: 'semar-gpt-fast'
+      label: 'SEMAR-GPT Cepat'
+      description: 'Jawaban cepat untuk pertanyaan sehari-hari.'
+      showOnLanding: true
+      preset:
+        endpoint: 'AI Gateway'
+        model: 'google/gemini-3.8-flash'
+        instructions: |
+          Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
+          Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan
+          demikian dan tawarkan langkah berikutnya. Jangan mengarang fakta.

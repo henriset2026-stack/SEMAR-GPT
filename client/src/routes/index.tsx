@@ -31,6 +31,20 @@ const AuthLayout = () => (
   </AuthContextProvider>
 );
 
+/** Public marketing page: renders for visitors and redirects signed-in users to chat. */
+const OptionalAuthLayout = () => (
+  <AuthContextProvider authConfig={{ loginRedirect: '/login', optional: true }}>
+    <WithRum>
+      <Outlet />
+    </WithRum>
+  </AuthContextProvider>
+);
+
+const loadLandingPage = () =>
+  importWithRecovery(() => import('~/components/Landing/LandingPage')).then((m) => ({
+    Component: m.default,
+  }));
+
 const loadInlinePromptsView = () =>
   importWithRecovery(() => import('~/components/Prompts/layouts/InlinePromptsView')).then((m) => ({
     Component: m.default,
@@ -77,6 +91,17 @@ export const router = createBrowserRouter(
         {
           path: 'error',
           element: <OAuthError />,
+        },
+      ],
+    },
+    {
+      path: '/',
+      element: <OptionalAuthLayout />,
+      errorElement: <RouteErrorBoundary />,
+      children: [
+        {
+          index: true,
+          lazy: loadLandingPage,
         },
       ],
     },
