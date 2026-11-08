@@ -4,7 +4,7 @@
   <img src="client/public/assets/logo.svg" width="120" alt="SEMAR-GPT logo" />
 </p>
 
-**SEMAR-GPT** adalah aplikasi asisten AI yang dibangun di atas
+**SEMAR-GPT** adalah aplikasi asisten AI yang dibangun di atas Libre-chat.
 SEMAR-GPT adalah platform asisten AI dengan nama aplikasi, logo, favicon, tema
 warna, welcome screen, dan footer yang dirancang khusus untuk pengguna Indonesia.
 
@@ -128,7 +128,7 @@ sistem berbahasa Indonesia di pemilih model.
 ## Skills, Agent Plugins, dan fitur Cindy
 
 Deployment ini sudah membawa fitur dan skill hasil adaptasi proyek
-[Cindy](https://github.com/makecindy/cindy):
+Cindy:
 
 - **3 deployment skill** di `skill/`: `skill-creator`, `learn`, dan
   `plugin-creator`.
@@ -285,8 +285,8 @@ ini bisa kembali ke default setelah restart, jadi catat di konfigurasi service.
 ### Model AI
 
 `librechat.yaml` mendefinisikan endpoint custom `AI Gateway` menggunakan
-Responses API di `https://midas-stage.telkomdigital.id/karpathy/responses`.
-Aplikasi menambahkan `/responses` pada base URL `/karpathy`; model preset
+Responses API di `https://midas-stage.telkomdigital.id/v1`.
+Aplikasi menambahkan `/responses` pada base URL `/v1`; model preset
 mengaktifkan `useResponsesApi` dan katalog model dikonfigurasi secara lokal:
 
 - `midas/gpt-5.5`
