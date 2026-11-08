@@ -163,16 +163,16 @@ Peta fitur lengkap, batasan, dan cara memperbarui dari Cindy ada di
 
 ## Kustomisasi branding
 
-| Yang diubah | File |
-| --- | --- |
-| Nama aplikasi, footer, URL bantuan | `.env` (`APP_TITLE`, `CUSTOM_FOOTER`, `HELP_AND_FAQ_URL`) |
-| Welcome screen, tema, fitur chat | `librechat.yaml` |
-| Judul tab, meta tag, PWA title | `client/index.html` |
-| Nama/ikon PWA | `client/vite.config.ts` |
-| Logo halaman login | `client/public/assets/logo.svg` |
-| Favicon & ikon PWA | `client/public/assets/favicon-*.png`, `apple-touch-icon-180x180.png`, `icon-192x192.png`, `maskable-icon.png` |
-| Fallback judul dokumen | `client/src/utils/documentTitle.ts` |
-| Nama container & mount config | `docker-compose.override.yml` |
+| Yang diubah                        | File                                                                                                          |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Nama aplikasi, footer, URL bantuan | `.env` (`APP_TITLE`, `CUSTOM_FOOTER`, `HELP_AND_FAQ_URL`)                                                     |
+| Welcome screen, tema, fitur chat   | `librechat.yaml`                                                                                              |
+| Judul tab, meta tag, PWA title     | `client/index.html`                                                                                           |
+| Nama/ikon PWA                      | `client/vite.config.ts`                                                                                       |
+| Logo halaman login                 | `client/public/assets/logo.svg`                                                                               |
+| Favicon & ikon PWA                 | `client/public/assets/favicon-*.png`, `apple-touch-icon-180x180.png`, `icon-192x192.png`, `maskable-icon.png` |
+| Fallback judul dokumen             | `client/src/utils/documentTitle.ts`                                                                           |
+| Nama container & mount config      | `docker-compose.override.yml`                                                                                 |
 
 ### Mengganti logo
 
@@ -232,6 +232,85 @@ Catatan:
   set `SEARCH=false` di `.env`.
 - Frontend dev server berjalan di port 3090 dan mem-proxy API ke 3080.
 - Untuk membuat user dari CLI: `npm run create-user`.
+
+---
+
+## Deployment produksi
+
+SEMAR-GPT produksi memakai dua layanan:
+
+| Bagian   | Platform | Alamat                                            |
+| -------- | -------- | ------------------------------------------------- |
+| Frontend | Vercel   | `https://semar-gpt.vercel.app`                    |
+| Backend  | Railway  | `https://semar-gpt-api-production.up.railway.app` |
+
+Vercel hanya menyajikan SPA statis. `vercel.json` me-rewrite `/api/:path*` ke
+backend Railway, sehingga cookie autentikasi tetap same-origin dan tidak perlu
+konfigurasi CORS tambahan. Database MongoDB berjalan sebagai service terpisah
+di project Railway yang sama.
+
+### Frontend (Vercel)
+
+Project sudah ter-link lewat `.vercel/project.json`. Deploy ulang dari root repo:
+
+```bash
+vercel --prod --yes
+```
+
+Build memakai `npm run frontend`, output di `client/dist`. `.vercelignore`
+mengecualikan `.env`, backend, Docker, dan dokumentasi dari upload.
+
+### Backend (Railway)
+
+Project `SEMAR-GPT`, service `SEMAR-GPT-API`. Deploy ulang dari root repo:
+
+```bash
+npx --yes @railway/cli@latest up
+```
+
+Environment variable yang wajib ada di service API (nilai secret tidak boleh
+di-commit):
+
+- `MONGO_URI` — connection string MongoDB Railway, dengan `authSource=admin`.
+- `APP_TITLE=SEMAR-GPT`
+- `DOMAIN_CLIENT=https://semar-gpt.vercel.app`
+- `DOMAIN_SERVER=https://semar-gpt-api-production.up.railway.app`
+- `JWT_SECRET`, `JWT_REFRESH_SECRET`, `CREDS_KEY`, `CREDS_IV`
+- `ALLOW_REGISTRATION`, `ALLOW_EMAIL_LOGIN`, `ALLOW_PASSWORD_RESET`
+- `AI_GATEWAY_API_KEY` — key Vercel AI Gateway untuk endpoint `AI Gateway`.
+- `SEARCH=false` — Meilisearch belum di-deploy.
+
+Volume upload API berukuran 500 MB. Jika MongoDB dibatasi ruang disk, set
+`indexBuildMinAvailableDiskSpaceMB=100` pada service MongoDB; nilai runtime
+ini bisa kembali ke default setelah restart, jadi catat di konfigurasi service.
+
+### Model AI
+
+`librechat.yaml` mendefinisikan endpoint custom `AI Gateway` ke
+`https://ai-gateway.vercel.sh/v1` dengan model:
+
+- `anthropic/claude-sonnet-4.5`
+- `openai/gpt-5`
+- `openai/gpt-5-nano`
+- `google/gemini-3.8-flash`
+
+Vercel AI Gateway menolak request sampai akun Vercel memiliki kartu kredit
+terdaftar, meskipun masih memakai free credits. Setelah kartu ditambahkan,
+key yang sama langsung dapat dipakai tanpa redeploy.
+
+### Verifikasi setelah deploy
+
+```bash
+curl https://semar-gpt-api-production.up.railway.app/health
+curl https://semar-gpt-api-production.up.railway.app/api/config
+```
+
+Buka `https://semar-gpt.vercel.app` di jendela privat: pengunjung yang belum
+login harus melihat landing page, sedangkan user yang sudah login diarahkan ke
+`/c/new`. Setelah login, `/api/endpoints` harus memuat `AI Gateway`.
+
+> Deploy saat ini dijalankan dari CLI. Hubungkan repo GitHub ke project Vercel
+> dan Railway jika ingin auto-deploy setiap push ke `main`.
 
 ---
 
