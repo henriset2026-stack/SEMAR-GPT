@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { OGDialog, OGDialogContent, OGDialogDescription, OGDialogTitle } from '@librechat/client';
 import {
-  Activity,
   ArrowRight,
   BarChart3,
   BookOpen,
@@ -52,7 +51,6 @@ const navItems: NavItem[] = [
   { href: '#use-case', key: 'com_landing_nav_usecases' },
   { href: '#agen', key: 'com_landing_nav_agents' },
   { href: '#developer', key: 'com_landing_nav_developer' },
-  { href: '#sumber-daya', key: 'com_landing_nav_resources' },
 ];
 
 const heroChips: { href: string; key: TranslationKeys; icon: LucideIcon }[] = [
@@ -245,38 +243,6 @@ const agents: AgentCard[] = [
     titleKey: 'com_landing_agent_asa_title',
     descKey: 'com_landing_agent_asa_desc',
     linkKey: 'com_landing_agent_asa_link',
-  },
-];
-
-const resources: {
-  icon: LucideIcon;
-  titleKey: TranslationKeys;
-  descKey: TranslationKeys;
-  href: string;
-}[] = [
-  {
-    icon: BookOpen,
-    titleKey: 'com_landing_resource_guide_title',
-    descKey: 'com_landing_resource_guide_desc',
-    href: '#fitur',
-  },
-  {
-    icon: FileText,
-    titleKey: 'com_landing_resource_docs_title',
-    descKey: 'com_landing_resource_docs_desc',
-    href: 'https://github.com/henriset2026-stack/SEMAR-GPT/blob/main/README.SEMAR-GPT.md',
-  },
-  {
-    icon: Github,
-    titleKey: 'com_landing_resource_repo_title',
-    descKey: 'com_landing_resource_repo_desc',
-    href: 'https://github.com/henriset2026-stack/SEMAR-GPT',
-  },
-  {
-    icon: Activity,
-    titleKey: 'com_landing_resource_status_title',
-    descKey: 'com_landing_resource_status_desc',
-    href: 'https://semar-gpt-api-production.up.railway.app/health',
   },
 ];
 
@@ -758,45 +724,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="sumber-daya" className="semar-section">
-          <div className="semar-container">
-            <SectionHead
-              eyebrowKey="com_landing_resources_eyebrow"
-              titleKey="com_landing_resources_title"
-              descKey="com_landing_resources_desc"
-            />
-            <div className="semar-resource-grid">
-              {resources.map((resource) => {
-                const Icon = resource.icon;
-                const external = resource.href.startsWith('http');
-                return (
-                  <a
-                    key={resource.titleKey}
-                    className="semar-card semar-card--resource"
-                    href={resource.href}
-                    target={external ? '_blank' : undefined}
-                    rel={external ? 'noreferrer' : undefined}
-                  >
-                    <span className="semar-card__icon">
-                      <Icon size={24} aria-hidden="true" />
-                    </span>
-                    <h3>{localize(resource.titleKey)}</h3>
-                    <p>{localize(resource.descKey)}</p>
-                    <span className="semar-card__link">
-                      {localize('com_landing_resource_open')}
-                      {external ? (
-                        <ExternalLink size={15} aria-hidden="true" />
-                      ) : (
-                        <ArrowRight size={15} aria-hidden="true" />
-                      )}
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         <section className="semar-cta">
           <div className="semar-container">
             <div className="semar-cta__card">
@@ -847,39 +774,6 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <Link to="/login">{localize('com_landing_login')}</Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3>{localize('com_landing_footer_resources')}</h3>
-              <ul>
-                <li>
-                  <a
-                    href="https://github.com/henriset2026-stack/SEMAR-GPT/blob/main/README.SEMAR-GPT.md"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {localize('com_landing_resource_docs_title')}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/henriset2026-stack/SEMAR-GPT"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {localize('com_landing_resource_repo_title')}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://semar-gpt-api-production.up.railway.app/health"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {localize('com_landing_resource_status_title')}
-                  </a>
                 </li>
               </ul>
             </div>

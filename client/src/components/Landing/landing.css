@@ -902,18 +902,6 @@ a.semar-card:hover .semar-card__link {
   color: #7f789e;
 }
 
-/* -------------------------------------------------------------- resources */
-
-.semar-resource-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.semar-card--resource {
-  color: inherit;
-}
-
 /* -------------------------------------------------------------------- cta */
 
 .semar-cta {
@@ -1285,8 +1273,7 @@ a.semar-card:hover .semar-card__link {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .semar-feature-grid,
-  .semar-resource-grid {
+  .semar-feature-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1431,8 +1418,7 @@ a.semar-card:hover .semar-card__link {
 
   .semar-benefits__grid,
   .semar-usecase-grid,
-  .semar-feature-grid,
-  .semar-resource-grid {
+  .semar-feature-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
