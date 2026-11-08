@@ -97,9 +97,8 @@ interface:
 # ---------------------------------------------------------------------------
 # Model gateway
 # ---------------------------------------------------------------------------
-# Vercel AI Gateway exposes OpenAI, Anthropic, Google and other providers
-# through one OpenAI-compatible API. Set AI_GATEWAY_API_KEY in the API
-# environment (Railway) and the endpoint below becomes available.
+# Midas-stage exposes an OpenAI Responses-compatible endpoint at
+# /karpathy/responses. Set AI_GATEWAY_API_KEY in the API environment (Railway).
 #
 # Any other OpenAI-compatible server (vLLM, Ollama, LiteLLM, OpenRouter, an
 # internal gateway, ...) can be added the same way.
@@ -107,16 +106,16 @@ endpoints:
   custom:
     - name: 'AI Gateway'
       apiKey: '${AI_GATEWAY_API_KEY}'
-      baseURL: 'https://ai-gateway.vercel.sh/v1'
+      baseURL: 'https://midas-stage.telkomdigital.id/karpathy'
       models:
         default:
           - 'anthropic/claude-sonnet-4.5'
           - 'openai/gpt-5'
           - 'google/gemini-3.8-flash'
-        fetch: true
+        fetch: false
       titleConvo: true
       titleModel: 'openai/gpt-5-nano'
-      modelDisplayLabel: 'Vercel AI Gateway'
+      modelDisplayLabel: 'Midas Gateway'
 
 # ---------------------------------------------------------------------------
 # Branded presets on the welcome screen
@@ -131,6 +130,7 @@ modelSpecs:
       preset:
         endpoint: 'AI Gateway'
         model: 'anthropic/claude-sonnet-4.5'
+        useResponsesApi: true
         instructions: |
           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
           Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan
@@ -142,6 +142,7 @@ modelSpecs:
       preset:
         endpoint: 'AI Gateway'
         model: 'google/gemini-3.8-flash'
+        useResponsesApi: true
         instructions: |
           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
           Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan

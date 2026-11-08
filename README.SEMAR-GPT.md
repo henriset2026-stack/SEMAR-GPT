@@ -277,7 +277,7 @@ di-commit):
 - `DOMAIN_SERVER=https://semar-gpt-api-production.up.railway.app`
 - `JWT_SECRET`, `JWT_REFRESH_SECRET`, `CREDS_KEY`, `CREDS_IV`
 - `ALLOW_REGISTRATION`, `ALLOW_EMAIL_LOGIN`, `ALLOW_PASSWORD_RESET`
-- `AI_GATEWAY_API_KEY` — key Vercel AI Gateway untuk endpoint `AI Gateway`.
+- `AI_GATEWAY_API_KEY` — key Midas Gateway untuk endpoint `AI Gateway`.
 - `SEARCH=false` — Meilisearch belum di-deploy.
 
 Volume upload API berukuran 500 MB. Jika MongoDB dibatasi ruang disk, set
@@ -286,17 +286,18 @@ ini bisa kembali ke default setelah restart, jadi catat di konfigurasi service.
 
 ### Model AI
 
-`librechat.yaml` mendefinisikan endpoint custom `AI Gateway` ke
-`https://ai-gateway.vercel.sh/v1` dengan model:
+`librechat.yaml` mendefinisikan endpoint custom `AI Gateway` menggunakan
+Responses API di `https://midas-stage.telkomdigital.id/karpathy/responses`.
+LibreChat menambahkan `/responses` pada base URL `/karpathy`; model preset
+mengaktifkan `useResponsesApi` dan katalog model dikonfigurasi secara lokal:
 
 - `anthropic/claude-sonnet-4.5`
 - `openai/gpt-5`
 - `openai/gpt-5-nano`
 - `google/gemini-3.8-flash`
 
-Vercel AI Gateway menolak request sampai akun Vercel memiliki kartu kredit
-terdaftar, meskipun masih memakai free credits. Setelah kartu ditambahkan,
-key yang sama langsung dapat dipakai tanpa redeploy.
+Pastikan key yang disimpan pada `AI_GATEWAY_API_KEY` diterbitkan untuk Midas
+Gateway dan memiliki akses ke model yang dipilih.
 
 ### Verifikasi setelah deploy
 
