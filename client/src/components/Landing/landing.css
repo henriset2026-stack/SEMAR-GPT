@@ -789,119 +789,6 @@ a.semar-card:hover .semar-card__link {
   margin-top: 13px;
 }
 
-/* -------------------------------------------------------------- developer */
-
-.semar-dev {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 52px;
-}
-
-.semar-dev .semar-section__title {
-  margin-top: 12px;
-}
-
-.semar-dev .semar-section__desc {
-  margin-inline: 0;
-}
-
-.semar-dev__list {
-  display: grid;
-  gap: 11px;
-  margin: 26px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.semar-dev__list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  color: var(--semar-muted-strong);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.semar-dev__list svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-  color: var(--semar-gold);
-}
-
-.semar-dev__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.semar-code {
-  overflow: hidden;
-  border: 1px solid var(--semar-border-strong);
-  border-radius: var(--semar-radius);
-  background: linear-gradient(180deg, #11152f 0%, #0b0e22 100%);
-  box-shadow: var(--semar-shadow);
-}
-
-.semar-code__bar {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 13px 16px;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.12);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.semar-code__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ff6b6b;
-}
-
-.semar-code__dot:nth-child(2) {
-  background: #f2c96d;
-}
-
-.semar-code__dot:nth-child(3) {
-  background: #6ee7a8;
-}
-
-.semar-code__file {
-  margin-left: 8px;
-  color: var(--semar-muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.76rem;
-}
-
-.semar-code pre {
-  margin: 0;
-  padding: 22px 20px;
-  overflow-x: auto;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.84rem;
-  line-height: 1.85;
-}
-
-.semar-code__line {
-  display: block;
-  white-space: pre;
-  color: #cfc8ea;
-}
-
-.semar-code__key {
-  color: #c4b5fd;
-}
-
-.semar-code__str {
-  color: #f2c96d;
-}
-
-.semar-code__comment {
-  color: #7f789e;
-}
-
 /* -------------------------------------------------------------------- cta */
 
 .semar-cta {
@@ -1363,11 +1250,6 @@ a.semar-card:hover .semar-card__link {
 
   .semar-agent-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .semar-dev {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 36px;
   }
 
   .semar-footer__grid {

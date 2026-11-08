@@ -13,9 +13,7 @@ import {
   Check,
   Code2,
   Database,
-  ExternalLink,
   FileText,
-  Github,
   GraduationCap,
   Layers,
   Menu,
@@ -50,7 +48,6 @@ const navItems: NavItem[] = [
   { href: '#fitur', key: 'com_landing_nav_features' },
   { href: '#use-case', key: 'com_landing_nav_usecases' },
   { href: '#agen', key: 'com_landing_nav_agents' },
-  { href: '#developer', key: 'com_landing_nav_developer' },
 ];
 
 const heroChips: { href: string; key: TranslationKeys; icon: LucideIcon }[] = [
@@ -637,93 +634,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="developer" className="semar-section semar-section--alt">
-          <div className="semar-container semar-dev">
-            <div>
-              <span className="semar-eyebrow">{localize('com_landing_dev_eyebrow')}</span>
-              <h2 className="semar-section__title">{localize('com_landing_dev_title')}</h2>
-              <p className="semar-section__desc">{localize('com_landing_dev_desc')}</p>
-              <ul className="semar-dev__list">
-                <li>
-                  <Check size={17} aria-hidden="true" />
-                  {localize('com_landing_dev_bullet1')}
-                </li>
-                <li>
-                  <Check size={17} aria-hidden="true" />
-                  {localize('com_landing_dev_bullet2')}
-                </li>
-                <li>
-                  <Check size={17} aria-hidden="true" />
-                  {localize('com_landing_dev_bullet3')}
-                </li>
-                <li>
-                  <Check size={17} aria-hidden="true" />
-                  {localize('com_landing_dev_bullet4')}
-                </li>
-              </ul>
-              <div className="semar-dev__actions">
-                <a
-                  className="semar-btn semar-btn--primary"
-                  href="https://github.com/henriset2026-stack/SEMAR-GPT/blob/main/README.SEMAR-GPT.md"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {localize('com_landing_dev_docs')}
-                  <ExternalLink size={16} aria-hidden="true" />
-                </a>
-                <a
-                  className="semar-btn semar-btn--outline"
-                  href="https://github.com/henriset2026-stack/SEMAR-GPT"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Github size={17} aria-hidden="true" />
-                  {localize('com_landing_dev_repo')}
-                </a>
-              </div>
-            </div>
-
-            {/* eslint-disable i18next/no-literal-string -- this block is a code sample, not UI copy */}
-            <div className="semar-code" aria-label={localize('com_landing_dev_code_label')}>
-              <div className="semar-code__bar" aria-hidden="true">
-                <span className="semar-code__dot" />
-                <span className="semar-code__dot" />
-                <span className="semar-code__dot" />
-                <span className="semar-code__file">plugin.json</span>
-              </div>
-              <pre>
-                <code>
-                  <span className="semar-code__line">
-                    <span className="semar-code__key">plugin</span>/
-                    <span className="semar-code__key">proto-bot</span>/
-                  </span>
-                  <span className="semar-code__line">
-                    {'  '}
-                    <span className="semar-code__str">plugin.json</span>
-                  </span>
-                  <span className="semar-code__line">
-                    {'  '}
-                    <span className="semar-code__key">skills</span>/
-                  </span>
-                  <span className="semar-code__line">
-                    {'    '}
-                    <span className="semar-code__key">proto-bot-ops</span>/
-                    <span className="semar-code__str">SKILL.md</span>
-                  </span>
-                  <span className="semar-code__line"> </span>
-                  <span className="semar-code__line">
-                    <span className="semar-code__comment"># 10 plugin · 30 skill</span>
-                  </span>
-                  <span className="semar-code__line">
-                    <span className="semar-code__comment"># 33 deployment skills</span>
-                  </span>
-                </code>
-              </pre>
-            </div>
-            {/* eslint-enable i18next/no-literal-string */}
-          </div>
-        </section>
-
         <section className="semar-cta">
           <div className="semar-container">
             <div className="semar-cta__card">
@@ -768,9 +678,6 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a href="#agen">{localize('com_landing_nav_agents')}</a>
-                </li>
-                <li>
-                  <a href="#developer">{localize('com_landing_nav_developer')}</a>
                 </li>
                 <li>
                   <Link to="/login">{localize('com_landing_login')}</Link>
