@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+api/*
+!api/package.json
+client/dist
+docs
+Dockerfile
+docker-compose*.yml
+prep-stream-dev-restack
