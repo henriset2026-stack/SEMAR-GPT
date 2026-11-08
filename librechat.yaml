@@ -95,25 +95,9 @@ interface:
   mascot: false
 
 # ---------------------------------------------------------------------------
-# Model gateway
+# Gemini
 # ---------------------------------------------------------------------------
-# The model gateway exposes an OpenAI-compatible API. Set AI_GATEWAY_API_KEY
-# in the API environment (Railway).
-#
-# Any other OpenAI-compatible server (vLLM, Ollama, LiteLLM, OpenRouter, an
-# internal gateway, ...) can be added the same way.
-endpoints:
-  custom:
-    - name: 'AI Gateway'
-      apiKey: '${AI_GATEWAY_API_KEY}'
-      baseURL: 'https://api-modelhub.aiplayground.id'
-      models:
-        default:
-          - 'midas/gpt-5.5'
-        fetch: false
-      titleConvo: true
-      titleModel: 'midas/gpt-5.5'
-      modelDisplayLabel: 'Midas Gateway'
+# Configure GOOGLE_KEY in the API environment (Railway).
 
 # ---------------------------------------------------------------------------
 # Branded presets on the welcome screen
@@ -126,9 +110,8 @@ modelSpecs:
       description: 'Asisten AI serbaguna untuk menulis, menganalisis, dan berkarya.'
       showOnLanding: true
       preset:
-        endpoint: 'AI Gateway'
-        model: 'midas/gpt-5.5'
-        useResponsesApi: true
+        endpoint: google
+        model: 'gemini-2.5-flash'
         instructions: |
           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
           Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan
@@ -138,9 +121,8 @@ modelSpecs:
       description: 'Jawaban cepat untuk pertanyaan sehari-hari.'
       showOnLanding: true
       preset:
-        endpoint: 'AI Gateway'
-        model: 'midas/gpt-5.5'
-        useResponsesApi: true
+        endpoint: google
+        model: 'gemini-2.5-flash'
         instructions: |
           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
           Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan
