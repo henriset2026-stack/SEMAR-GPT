@@ -60,6 +60,7 @@ jest.mock('~/hooks', () => ({
 jest.mock('~/data-provider', () => ({
   useGetEndpointsQuery: jest.fn(() => ({ data: {} })),
   useGetAgentCategoriesQuery: jest.fn(() => ({ data: mockCategories, isLoading: false })),
+  useGetStartupConfig: jest.fn(() => ({ data: { appTitle: 'SEMAR-GPT' } })),
 }));
 
 jest.mock('librechat-data-provider', () => {

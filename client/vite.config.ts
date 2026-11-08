@@ -155,11 +155,13 @@ export default defineConfig(({ command }) => ({
       },
       includeAssets: [],
       manifest: {
-        name: 'LibreChat',
-        short_name: 'LibreChat',
+        name: 'SEMAR-GPT',
+        short_name: 'SEMAR-GPT',
+        description: 'SEMAR-GPT — asisten AI untuk berpikir, menulis, dan berkarya.',
+        lang: 'id',
         display: 'standalone',
-        background_color: '#000000',
-        theme_color: '#009688',
+        background_color: '#0B1220',
+        theme_color: '#0F766E',
         icons: [
           {
             src: 'assets/favicon-32x32.png',

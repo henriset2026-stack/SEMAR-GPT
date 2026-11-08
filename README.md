@@ -1,16 +1,22 @@
 <p align="center">
-  <a href="https://librechat.ai">
-    <img src="client/public/assets/logo.svg" height="256">
+  <a href="README.SEMAR-GPT.md">
+    <img src="client/public/assets/logo.svg" height="160" alt="SEMAR-GPT">
   </a>
   <h1 align="center">
-    <a href="https://librechat.ai">LibreChat</a>
+    <a href="README.SEMAR-GPT.md">SEMAR-GPT</a>
   </h1>
+  <p align="center"><strong>Asisten AI untuk berpikir, menulis, dan berkarya.</strong></p>
 </p>
 
 <p align="center">
   <strong>English</strong> ·
   <a href="README.zh.md">中文</a>
 </p>
+
+> **This repository is the SEMAR-GPT deployment of LibreChat.**
+> See [README.SEMAR-GPT.md](README.SEMAR-GPT.md) for SEMAR-GPT setup,
+> branding, provider configuration, and the Docker quick start. The
+> documentation below describes the upstream LibreChat project.
 
 <p align="center">
   <a href="https://discord.librechat.ai"> 

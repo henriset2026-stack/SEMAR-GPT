@@ -1,0 +1,117 @@
+# SEMAR-GPT deployment configuration
+# Built on LibreChat. Documentation: https://www.librechat.ai/docs/configuration/librechat_yaml
+#
+# This file is intentionally kept small: every key below is optional except `version`.
+# Provider credentials belong in `.env`; see README.SEMAR-GPT.md for the supported keys.
+
+version: 1.3.18
+
+# Conversation search. The bundled docker-compose stack ships Meilisearch.
+cache: true
+
+interface:
+  # Shown on the welcome screen before the first message.
+  customWelcome: 'Selamat datang di SEMAR-GPT — asisten AI Anda untuk berpikir, menulis, dan berkarya.'
+  # Show the time-of-day greeting (and the text above) instead of an endpoint name.
+  landingHeading: greeting
+  # Keep the deployment footer and policy links on the welcome screen.
+  landingFooter: true
+
+  # SEMAR-GPT palette: deep navy and teal, with a warm gold mark.
+  # Only the roles that differ from the LibreChat defaults are listed.
+  theme:
+    version: 1
+    name: semar-gpt
+    modes:
+      light:
+        colors:
+          rgb-accent-primary: '13 148 136'
+          rgb-accent-primary-hover: '15 118 110'
+          rgb-link: '13 116 116'
+          rgb-link-hover: '15 118 110'
+          rgb-ring-primary: '13 148 136'
+          rgb-focus-control: '15 118 110'
+          rgb-border-field-focus: '13 148 136'
+          rgb-surface-submit: '13 148 136'
+          rgb-surface-submit-hover: '15 118 110'
+          rgb-surface-primary-alt: '248 250 252'
+          rgb-surface-sidebar: '248 250 252'
+        appearance:
+          controlRadius: '0.625rem'
+      dark:
+        colors:
+          rgb-accent-primary: '45 212 191'
+          rgb-accent-primary-hover: '94 234 212'
+          rgb-link: '94 234 212'
+          rgb-link-hover: '153 246 228'
+          rgb-ring-primary: '45 212 191'
+          rgb-focus-control: '94 234 212'
+          rgb-border-field-focus: '45 212 191'
+          rgb-surface-submit: '13 148 136'
+          rgb-surface-submit-hover: '15 118 110'
+          rgb-surface-primary-alt: '15 23 42'
+          rgb-surface-sidebar: '15 23 42'
+          rgb-header-primary: '15 23 42'
+        appearance:
+          controlRadius: '0.625rem'
+
+  # Chat features
+  # File search needs the RAG API and an embedding provider; enable it after
+  # setting RAG_OPENAI_API_KEY (or another embedding backend) in `.env`.
+  fileSearch: false
+  modelSelect: true
+  parameters: true
+  presets: true
+  bookmarks: true
+  multiConvo: true
+  prompts:
+    use: true
+    create: true
+    share: false
+    public: false
+  agents:
+    use: true
+    create: true
+    share: false
+    public: false
+  # The default LibreChat mascot is disabled; SEMAR-GPT uses its own identity.
+  mascot: false
+
+# ---------------------------------------------------------------------------
+# Connect SEMAR-GPT to an OpenAI-compatible model gateway
+# ---------------------------------------------------------------------------
+# Uncomment the block below and set SEMAR_API_BASE_URL / SEMAR_API_KEY in `.env`.
+# The endpoint accepts any OpenAI-compatible server (vLLM, Ollama, LiteLLM,
+# OpenRouter, an internal gateway, ...).
+#
+# endpoints:
+#   custom:
+#     - name: 'SEMAR'
+#       apiKey: '${SEMAR_API_KEY}'
+#       baseURL: '${SEMAR_API_BASE_URL}'
+#       models:
+#         default: ['semar-1']
+#         fetch: false
+#       titleConvo: true
+#       titleModel: 'semar-1'
+#       modelDisplayLabel: 'SEMAR-GPT'
+
+# ---------------------------------------------------------------------------
+# Optional: expose a branded model preset on the welcome screen
+# ---------------------------------------------------------------------------
+# Requires OPENAI_API_KEY (or another configured endpoint) in `.env`.
+#
+# modelSpecs:
+#   prioritize: true
+#   list:
+#     - name: 'semar-gpt'
+#       label: 'SEMAR-GPT'
+#       description: 'Asisten AI serbaguna untuk menulis, menganalisis, dan berkarya.'
+#       showOnLanding: true
+#       preset:
+#         endpoint: 'openAI'
+#         model: 'gpt-4o-mini'
+#         instructions: |
+#           Anda adalah SEMAR-GPT, asisten AI yang ramah, teliti, dan ringkas.
+#           Jawab dalam bahasa yang digunakan pengguna. Jika tidak yakin, katakan
+#           demikian dan tawarkan langkah berikutnya. Jangan mengarang fakta.

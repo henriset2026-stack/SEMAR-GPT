@@ -1,0 +1,46 @@
+# SEMAR-GPT local stack
+#
+# This override keeps the upstream LibreChat services intact while giving the
+# deployment its own Compose project name, container names, and YAML config.
+# Start with:
+#   docker compose up -d --build
+# Then open http://localhost:3080
+
+name: semar-gpt
+
+services:
+  api:
+    container_name: semar-gpt-api
+    # Build from this repo so the SEMAR-GPT logo, title, and manifest are
+    # included. The upstream registry image carries LibreChat branding only.
+    image: semar-gpt:local
+    build:
+      context: .
+      target: node
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/SEMAR-GPT
+    volumes:
+      - type: bind
+        source: ./librechat.yaml
+        target: /app/librechat.yaml
+
+  admin-panel:
+    container_name: semar-gpt-admin-panel
+
+  mongodb:
+    container_name: semar-gpt-mongodb
+    # Loopback-only so a local `npm run backend:dev` can use the same database.
+    ports:
+      - '127.0.0.1:27017:27017'
+
+  meilisearch:
+    container_name: semar-gpt-meilisearch
+    # Loopback-only so a local `npm run backend:dev` can use the same index.
+    ports:
+      - '127.0.0.1:7700:7700'
+
+  vectordb:
+    container_name: semar-gpt-vectordb
+
+  rag_api:
+    container_name: semar-gpt-rag-api
