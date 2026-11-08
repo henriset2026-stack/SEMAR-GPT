@@ -447,21 +447,23 @@ html.semar-landing-root body {
 }
 
 .semar-hero__chips {
-  position: absolute;
-  top: 50%;
-  right: -6px;
+  position: relative;
   z-index: 3;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transform: translateY(-50%);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 560px;
+  margin-top: 14px;
 }
 
 .semar-chip {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-width: 158px;
+  flex: 1 1 calc(50% - 10px);
+  min-width: 0;
   padding: 11px 15px;
   border: 1px solid rgba(167, 139, 250, 0.22);
   border-radius: 14px;
@@ -493,19 +495,19 @@ html.semar-landing-root body {
 }
 
 .semar-chip:nth-child(2) {
-  margin-left: 22px;
+  margin-left: 0;
 }
 
 .semar-chip:nth-child(3) {
-  margin-left: 6px;
+  margin-left: 0;
 }
 
 .semar-chip:nth-child(4) {
-  margin-left: 26px;
+  margin-left: 0;
 }
 
 .semar-chip:nth-child(5) {
-  margin-left: 12px;
+  margin-left: 0;
 }
 
 /* -------------------------------------------------------------- benefits */
@@ -1270,7 +1272,7 @@ a.semar-card:hover .semar-card__link {
   }
 
   .semar-hero__chips {
-    right: -4px;
+    max-width: 100%;
   }
 
   .semar-chip {
