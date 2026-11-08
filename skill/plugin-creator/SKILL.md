@@ -1,6 +1,6 @@
 ---
 name: plugin-creator
-description: "Create, review, or update a SEMAR-GPT Agent Plugin: a plugin.json package with bundled skills, optional MCP servers, and optional hooks. Use for plugin packaging, MCP wiring, and deployment questions; use skill-creator for a standalone skill."
+description: 'Create, review, or update a SEMAR-GPT Agent Plugin: a plugin.json package with bundled skills, optional MCP servers, and optional hooks. Use for plugin packaging, MCP wiring, and deployment questions; use skill-creator for a standalone skill.'
 metadata:
   source: cindy
   adapted-from: cindy-plugin-creator
@@ -9,7 +9,7 @@ metadata:
 
 # SEMAR-GPT Agent Plugin Creator
 
-An Agent Plugin is a folder under `plugin/` that the API loads at startup. It can bundle skills, MCP servers, and LibreChat hooks. Use it when several assets ship together; use a deployment skill when only a `SKILL.md` is needed.
+An Agent Plugin is a folder under `plugin/` that the API loads at startup. It can bundle skills, MCP servers, and host hooks. Use it when several assets ship together; use a deployment skill when only a `SKILL.md` is needed.
 
 ## Package layout
 
@@ -44,16 +44,16 @@ The loader scans immediate child directories of `plugin/` (default `DEPLOYMENT_P
 }
 ```
 
-| Field | Required | Rules |
-| --- | --- | --- |
-| `$schema` | Yes | Must be exactly `https://agent-plugins.org/schemas/1.0.0/plugin.schema.json`. |
-| `name` | Yes | 1–64 characters; lowercase letters, digits, hyphens, and periods; starts and ends alphanumeric; no `--` or `..` runs. It also names the persistent data directory. |
-| `version` | No | String. The loader does not require semver, but use one. |
-| `description` | No | String. Explain the bundle, not each skill. |
-| `author` | No | Object with optional string `name`, `email`, and `url`. |
-| `homepage`, `repository`, `license` | No | Strings. |
-| `keywords` | No | Array of strings. |
-| `extensions` | No | Object of namespaced extension data. A non-object value warns; a non-object namespace rejects the plugin. |
+| Field                               | Required | Rules                                                                                                                                                              |
+| ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `$schema`                           | Yes      | Must be exactly `https://agent-plugins.org/schemas/1.0.0/plugin.schema.json`.                                                                                      |
+| `name`                              | Yes      | 1–64 characters; lowercase letters, digits, hyphens, and periods; starts and ends alphanumeric; no `--` or `..` runs. It also names the persistent data directory. |
+| `version`                           | No       | String. The loader does not require semver, but use one.                                                                                                           |
+| `description`                       | No       | String. Explain the bundle, not each skill.                                                                                                                        |
+| `author`                            | No       | Object with optional string `name`, `email`, and `url`.                                                                                                            |
+| `homepage`, `repository`, `license` | No       | Strings.                                                                                                                                                           |
+| `keywords`                          | No       | Array of strings.                                                                                                                                                  |
+| `extensions`                        | No       | Object of namespaced extension data. A non-object value warns; a non-object namespace rejects the plugin.                                                          |
 
 Unknown top-level fields are reported and ignored. Do not put secrets in the manifest: it is readable by anyone who can read the deployment.
 
@@ -130,4 +130,4 @@ Start from `templates/plugin.json` and `templates/mcp.json` in this skill, then 
 
 ## Attribution
 
-This skill is adapted from Cindy's `cindy-plugin-creator`. Cindy plugin concepts such as `ghost.json`, `ghost_forge_*`, `.cindy` packages, and SkillHub publication do not exist in SEMAR-GPT; this version documents the LibreChat Agent Plugins contract instead.
+This skill is adapted from Cindy's `cindy-plugin-creator`. Cindy plugin concepts such as `ghost.json`, `ghost_forge_*`, `.cindy` packages, and SkillHub publication do not exist in SEMAR-GPT; this version documents the Agent Plugin contract instead.

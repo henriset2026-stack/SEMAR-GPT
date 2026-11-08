@@ -1,5 +1,5 @@
 # SEMAR-GPT deployment configuration
-# Built on LibreChat. Documentation: https://www.librechat.ai/docs/configuration/librechat_yaml
+# SEMAR-GPT deployment configuration.
 #
 # This file is intentionally kept small: every key below is optional except `version`.
 # Provider credentials belong in `.env`; see README.SEMAR-GPT.md for the supported keys.
@@ -18,7 +18,7 @@ interface:
   landingFooter: true
 
   # SEMAR-GPT palette: deep navy and teal, with a warm gold mark.
-  # Only the roles that differ from the LibreChat defaults are listed.
+  # Only roles that differ from the built-in defaults are listed.
   theme:
     version: 1
     name: semar-gpt
@@ -91,7 +91,7 @@ interface:
   schedules:
     use: true
     create: true
-  # The default LibreChat mascot is disabled; SEMAR-GPT uses its own identity.
+  # SEMAR-GPT uses its own identity rather than a built-in mascot.
   mascot: false
 
 # ---------------------------------------------------------------------------

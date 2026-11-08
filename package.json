@@ -1,5 +1,5 @@
 {
-  "name": "LibreChat",
+  "name": "semar-gpt",
   "version": "v0.8.9-rc1",
   "description": "",
   "packageManager": "npm@11.13.0",
@@ -170,14 +170,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LibreChat-AI/LibreChat.git"
+    "url": "git+https://github.com/henriset2026-stack/SEMAR-GPT.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LibreChat-AI/LibreChat/issues"
+    "url": "https://github.com/henriset2026-stack/SEMAR-GPT/issues"
   },
-  "homepage": "https://librechat.ai/",
+  "homepage": "https://semar-gpt.vercel.app/",
   "devDependencies": {
     "@antithesishq/bombadil": "0.6.1",
     "@axe-core/playwright": "^4.10.1",

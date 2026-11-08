@@ -5,20 +5,19 @@
 </p>
 
 **SEMAR-GPT** adalah aplikasi asisten AI yang dibangun di atas
-[LibreChat](https://github.com/LibreChat-AI/LibreChat). Repo ini adalah
-deployment yang sudah di-branding: nama aplikasi, logo, favicon, tema warna,
-welcome screen, dan footer sudah disesuaikan untuk SEMAR-GPT.
+SEMAR-GPT adalah platform asisten AI dengan nama aplikasi, logo, favicon, tema
+warna, welcome screen, dan footer yang dirancang khusus untuk pengguna Indonesia.
 
 - **Antarmuka:** React + Vite, tema navy/teal dengan aksen emas.
 - **Backend:** Node.js/TypeScript, MongoDB, Meilisearch, dan RAG API.
-- **Model:** semua provider yang didukung LibreChat (OpenAI, Anthropic, Google,
+- **Model:** provider AI populer (OpenAI, Anthropic, Google,
   Azure, Bedrock, Ollama, vLLM, LiteLLM, gateway OpenAI-compatible, dan lain-lain).
 - **Skills:** 3 deployment skill dan 10 Agent Plugin (30 skill) hasil adaptasi
   proyek Cindy, plus skill buatan user.
 - **Fitur kolaborasi:** Agents, Memories, Chat Projects, Schedules, Artifacts,
   dan subagents.
-- **Lisensi:** MIT untuk LibreChat; material Cindy tetap Apache-2.0 (lihat
-  [`CINDY-LICENSE.txt`](CINDY-LICENSE.txt)).
+- **Lisensi:** lihat berkas lisensi yang disertakan. Material Cindy tetap
+  Apache-2.0 (lihat [`CINDY-LICENSE.txt`](CINDY-LICENSE.txt)).
 
 ---
 
@@ -61,9 +60,8 @@ Perintah lain:
 > volume Compose dan folder `./data-node`, `./meili_data_v1.35.1`, `./uploads`,
 > `./logs`, dan `./images`.
 >
-> Panel admin di port **3000** adalah tool upstream LibreChat dan belum
-> di-rebranding. Jika tidak diperlukan, hapus service `admin-panel` dari
-> stack.
+> Panel admin di port **3000** merupakan tool administrasi terpisah. Jika tidak
+> diperlukan, hapus service `admin-panel` dari stack.
 
 ---
 
@@ -186,7 +184,7 @@ docker compose build api
 docker compose up -d
 ```
 
-Jika memakai image resmi LibreChat (bukan build lokal), file frontend di
+Jika memakai image prebuilt (bukan build lokal), file frontend di
 dalam image tidak ikut berubah. Build image sendiri dari repo ini, atau mount
 aset statis sesuai kebutuhan deployment.
 
@@ -199,7 +197,7 @@ diinginkan.
 ### Tema warna
 
 Tema `semar-gpt` didefinisikan inline di `librechat.yaml`. Hanya token yang
-berbeda dari default LibreChat yang ditulis; sisanya mewarisi tema bawaan.
+berbeda dari tema bawaan yang ditulis; sisanya mewarisi nilai default.
 Token warna memakai triplet RGB dengan format `"R G B"`.
 
 ---
@@ -288,7 +286,7 @@ ini bisa kembali ke default setelah restart, jadi catat di konfigurasi service.
 
 `librechat.yaml` mendefinisikan endpoint custom `AI Gateway` menggunakan
 Responses API di `https://midas-stage.telkomdigital.id/karpathy/responses`.
-LibreChat menambahkan `/responses` pada base URL `/karpathy`; model preset
+Aplikasi menambahkan `/responses` pada base URL `/karpathy`; model preset
 mengaktifkan `useResponsesApi` dan katalog model dikonfigurasi secara lokal:
 
 - `midas/gpt-5.5`
@@ -319,7 +317,7 @@ login harus melihat landing page, sedangkan user yang sudah login diarahkan ke
 `.env` dibuat dari `.env.example` dan sudah berisi:
 
 - `APP_TITLE=SEMAR-GPT`
-- `CUSTOM_FOOTER="SEMAR-GPT — Asisten AI Anda | Didukung oleh [LibreChat](https://librechat.ai)"`
+- `CUSTOM_FOOTER="SEMAR-GPT — Asisten AI Anda"``
 - `SEARCH=true` dan `MEILI_MASTER_KEY` acak
 - `CREDS_KEY`, `CREDS_IV`, `JWT_SECRET`, `JWT_REFRESH_SECRET` acak
 - `ADMIN_PANEL_SESSION_SECRET` acak
@@ -340,13 +338,13 @@ diaktifkan secara eksplisit:
 - `interface.skills` — katalog skill dan pembuatan skill oleh user.
 - `interface.memories` — memori preferensi yang dikonfirmasi.
 - `interface.schedules` — tugas terjadwal (eksperimental, default mati di
-  LibreChat sehingga harus diaktifkan).
+  secara default sehingga harus diaktifkan).
 - `interface.fileSearch: false` — dinonaktifkan sampai embedding provider
   dikonfigurasi.
 
 ### File yang di-ignore Git
 
-Upstream LibreChat meng-ignore `.env*`, `librechat.yaml`, dan
+Repo ini meng-ignore `.env*`, `librechat.yaml`, dan
 `docker-compose.override.yml`. Jika ingin menyimpan konfigurasi SEMAR-GPT di
 repo, tambahkan pengecualian di `.gitignore` atau gunakan `git add -f` dengan
 hati-hati (jangan pernah commit secret).
@@ -413,7 +411,7 @@ dengan `id -u` dan `id -g`, lalu restart.
 
 ```
 .
-├── api/                         # wiring Express (upstream LibreChat)
+├── api/                         # wiring Express
 ├── client/                      # React app + branding assets
 │   ├── public/assets/           # logo, favicon, ikon PWA
 │   ├── src/                     # komponen, hook, locale
@@ -439,10 +437,8 @@ dengan `id -u` dan `id -g`, lalu restart.
 
 ## Atribusi
 
-SEMAR-GPT dibangun di atas LibreChat, proyek open source MIT. Logo dan nama
-SEMAR-GPT adalah branding deployment ini; kode dasar tetap milik para
-kontributor LibreChat. Lihat [LICENSE](LICENSE) dan
-[README.md](README.md) untuk dokumentasi upstream.
+SEMAR-GPT adalah asisten AI dengan branding, konfigurasi, dan panduan deployment
+tersendiri. Informasi lisensi dan hak cipta tercantum pada berkas [LICENSE](LICENSE).
 
 Skill dan Agent Plugin di `skill/` dan `plugin/` merupakan adaptasi dari
 proyek [Cindy](https://github.com/makecindy/cindy) yang dilisensikan

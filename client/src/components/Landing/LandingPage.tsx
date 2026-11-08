@@ -264,7 +264,7 @@ const resources: {
     icon: FileText,
     titleKey: 'com_landing_resource_docs_title',
     descKey: 'com_landing_resource_docs_desc',
-    href: 'https://www.librechat.ai/docs',
+    href: 'https://github.com/henriset2026-stack/SEMAR-GPT/blob/main/README.SEMAR-GPT.md',
   },
   {
     icon: Github,
@@ -698,7 +698,7 @@ export default function LandingPage() {
               <div className="semar-dev__actions">
                 <a
                   className="semar-btn semar-btn--primary"
-                  href="https://www.librechat.ai/docs"
+                  href="https://github.com/henriset2026-stack/SEMAR-GPT/blob/main/README.SEMAR-GPT.md"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -855,7 +855,11 @@ export default function LandingPage() {
               <h3>{localize('com_landing_footer_resources')}</h3>
               <ul>
                 <li>
-                  <a href="https://www.librechat.ai/docs" target="_blank" rel="noreferrer">
+                  <a
+                    href="https://github.com/henriset2026-stack/SEMAR-GPT/blob/main/README.SEMAR-GPT.md"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {localize('com_landing_resource_docs_title')}
                   </a>
                 </li>
@@ -866,35 +870,6 @@ export default function LandingPage() {
                     rel="noreferrer"
                   >
                     {localize('com_landing_resource_repo_title')}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://semar-gpt-api-production.up.railway.app/health"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {localize('com_landing_resource_status_title')}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3>{localize('com_landing_footer_platform')}</h3>
-              <ul>
-                <li>
-                  <a href="https://www.librechat.ai" target="_blank" rel="noreferrer">
-                    {localize('com_landing_platform_librechat')}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/henriset2026-stack/SEMAR-GPT"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {localize('com_landing_platform_github')}
                   </a>
                 </li>
                 <li>
