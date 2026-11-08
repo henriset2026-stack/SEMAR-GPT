@@ -97,8 +97,8 @@ interface:
 # ---------------------------------------------------------------------------
 # Model gateway
 # ---------------------------------------------------------------------------
-# Midas-stage exposes an OpenAI Responses-compatible endpoint at
-# /karpathy/responses. Set AI_GATEWAY_API_KEY in the API environment (Railway).
+# The model gateway exposes an OpenAI-compatible API. Set AI_GATEWAY_API_KEY
+# in the API environment (Railway).
 #
 # Any other OpenAI-compatible server (vLLM, Ollama, LiteLLM, OpenRouter, an
 # internal gateway, ...) can be added the same way.
@@ -106,7 +106,7 @@ endpoints:
   custom:
     - name: 'AI Gateway'
       apiKey: '${AI_GATEWAY_API_KEY}'
-      baseURL: 'https://midas-stage.telkomdigital.id/karpathy'
+      baseURL: 'https://api-modelhub.aiplayground.id'
       models:
         default:
           - 'midas/gpt-5.5'
