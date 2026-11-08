@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "startup-qa-bot",
+  "version": "0.5.2",
+  "description": "Walk through a product in an isolated test environment and maintain a page map, change log, and regression checklist.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "product QA"
+  ]
+}

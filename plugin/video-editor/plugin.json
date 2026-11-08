@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "video-editor",
+  "version": "0.5.2",
+  "description": "Organize footage, edit plans, and delivery checks for short vertical talking-head videos without installing private tools or auto-publishing.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "video editing"
+  ]
+}

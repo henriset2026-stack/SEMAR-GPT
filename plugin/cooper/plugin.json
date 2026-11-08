@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "cooper",
+  "version": "0.5.2",
+  "description": "Research public topics and sources selected by the user, with threshold alerts and evidence-backed briefs.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "research signals"
+  ]
+}

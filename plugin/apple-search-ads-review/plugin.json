@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "apple-search-ads-review",
+  "version": "0.5.2",
+  "description": "Review exported Apple Search Ads data against cost-per-install targets and produce a change list the user can apply in the ad console.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "Apple Search Ads review"
+  ]
+}

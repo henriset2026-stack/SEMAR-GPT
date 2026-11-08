@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "seo-aeo-desk",
+  "version": "0.5.2",
+  "description": "Turn keywords, user questions, and site material into topic boards, writer briefs, search reports, and page-refresh plans.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "SEO/AEO topic planning"
+  ]
+}

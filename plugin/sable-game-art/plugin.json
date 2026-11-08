@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "sable-game-art",
+  "version": "0.5.2",
+  "description": "Game art direction: style guides, hex palettes, sprite and tile specs, image prompts, and consistency checks for supplied art.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "game art direction"
+  ]
+}

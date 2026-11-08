@@ -23,6 +23,23 @@ services:
       - type: bind
         source: ./librechat.yaml
         target: /app/librechat.yaml
+      # Deployment skills and Agent Plugins load from these directories at API
+      # startup. Bind-mounting keeps edits on the host without rebuilding the
+      # image; restart the API to pick up changes.
+      - type: bind
+        source: ./skill
+        target: /app/skill
+        read_only: true
+      - type: bind
+        source: ./plugin
+        target: /app/plugin
+        read_only: true
+      # Keep the skill validator available in the container:
+      #   docker exec semar-gpt-api node /app/scripts/check-skills.mjs --root /app
+      - type: bind
+        source: ./scripts
+        target: /app/scripts
+        read_only: true
 
   admin-panel:
     container_name: semar-gpt-admin-panel

@@ -74,6 +74,23 @@ interface:
     create: true
     share: false
     public: false
+  # Skills catalog. Deployment skills (`skill/`) and Agent Plugins (`plugin/`)
+  # load at API startup and appear here. Users may author their own skills;
+  # sharing is limited to the owner until an operator enables it.
+  skills:
+    use: true
+    create: true
+    share: false
+    public: false
+  # Memories let a partner keep confirmed preferences across conversations.
+  # Only explicitly confirmed facts are stored; each user can clear them.
+  memories: true
+  # Scheduled tasks are experimental and off by default upstream, so enable
+  # them explicitly. The bundled stack runs a single API process and sets
+  # SCHEDULES_SINGLE_PROCESS=true in `.env`; see docs/cindy-integration.md.
+  schedules:
+    use: true
+    create: true
   # The default LibreChat mascot is disabled; SEMAR-GPT uses its own identity.
   mascot: false
 

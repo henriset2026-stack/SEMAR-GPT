@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ad-spend-watch",
+  "version": "0.5.2",
+  "description": "Monitor paid ad spend from user-supplied reports, compare it with user-defined thresholds, and produce budget-pacing advice without touching ad accounts.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "ad spend monitoring"
+  ]
+}

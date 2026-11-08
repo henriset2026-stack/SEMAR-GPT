@@ -1,0 +1,16 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "nightly-audit-engineer",
+  "version": "0.5.2",
+  "description": "Audit code quality within an entrusted scope, preserving evidence and deduplication clues; fixes stay separately authorized.",
+  "author": {
+    "name": "Cindy contributors; adapted for SEMAR-GPT"
+  },
+  "repository": "https://github.com/makecindy/cindy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "cindy",
+    "semar-gpt",
+    "code audit"
+  ]
+}

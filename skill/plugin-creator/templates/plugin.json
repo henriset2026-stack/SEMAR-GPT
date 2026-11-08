@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "example-plugin",
+  "version": "0.1.0",
+  "description": "What this plugin bundles and when to use it.",
+  "author": {
+    "name": "Your team"
+  },
+  "license": "Apache-2.0",
+  "keywords": ["semar-gpt"]
+}

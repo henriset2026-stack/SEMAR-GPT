@@ -13,7 +13,12 @@ welcome screen, dan footer sudah disesuaikan untuk SEMAR-GPT.
 - **Backend:** Node.js/TypeScript, MongoDB, Meilisearch, dan RAG API.
 - **Model:** semua provider yang didukung LibreChat (OpenAI, Anthropic, Google,
   Azure, Bedrock, Ollama, vLLM, LiteLLM, gateway OpenAI-compatible, dan lain-lain).
-- **Lisensi:** MIT, mengikuti lisensi LibreChat.
+- **Skills:** 3 deployment skill dan 10 Agent Plugin (30 skill) hasil adaptasi
+  proyek Cindy, plus skill buatan user.
+- **Fitur kolaborasi:** Agents, Memories, Chat Projects, Schedules, Artifacts,
+  dan subagents.
+- **Lisensi:** MIT untuk LibreChat; material Cindy tetap Apache-2.0 (lihat
+  [`CINDY-LICENSE.txt`](CINDY-LICENSE.txt)).
 
 ---
 
@@ -122,6 +127,40 @@ sistem berbahasa Indonesia di pemilih model.
 
 ---
 
+## Skills, Agent Plugins, dan fitur Cindy
+
+Deployment ini sudah membawa fitur dan skill hasil adaptasi proyek
+[Cindy](https://github.com/makecindy/cindy):
+
+- **3 deployment skill** di `skill/`: `skill-creator`, `learn`, dan
+  `plugin-creator`.
+- **10 Agent Plugin** di `plugin/`, masing-masing dengan tiga skill
+  (`getting-started`, `ops`, `evidence`): ad-spend-watch,
+  apple-search-ads-review, cooper, engineer-bot, nightly-audit-engineer,
+  proto-bot, sable-game-art, seo-aeo-desk, startup-qa-bot, dan video-editor.
+- **Schedules** untuk tugas berkala, **Memories** untuk preferensi yang
+  dikonfirmasi, dan **Chat Projects** untuk mengelompokkan pekerjaan.
+
+Semua skill muncul di halaman **Skills** dan dapat dipanggil eksplisit atau
+dipilih model berdasarkan deskripsinya. `skill/` dan `plugin/` di-mount
+read-only ke container; setelah mengubah isinya, jalankan:
+
+```bash
+node scripts/check-skills.mjs
+docker compose restart api
+```
+
+Peta fitur lengkap, batasan, dan cara memperbarui dari Cindy ada di
+[`docs/cindy-integration.md`](docs/cindy-integration.md).
+
+> **Catatan:** body skill bot dipertahankan dalam bahasa Mandarin dari Cindy;
+> deskripsi katalog diterjemahkan ke Inggris. Agent diinstruksikan menjawab
+> dalam bahasa user. Tool eksternal (GitHub, browser, email, image generation,
+> dan lain-lain) tidak dibundel — konfigurasikan sebagai MCP server atau tool
+> bawaan bila diperlukan.
+
+---
+
 ## Kustomisasi branding
 
 | Yang diubah | File |
@@ -218,7 +257,15 @@ Catatan:
 ### `librechat.yaml`
 
 Berisi branding, tema, fitur chat, dan contoh endpoint/preset. File ini
-di-mount ke container oleh `docker-compose.override.yml`.
+di-mount ke container oleh `docker-compose.override.yml`. Fitur yang sudah
+diaktifkan secara eksplisit:
+
+- `interface.skills` — katalog skill dan pembuatan skill oleh user.
+- `interface.memories` — memori preferensi yang dikonfirmasi.
+- `interface.schedules` — tugas terjadwal (eksperimental, default mati di
+  LibreChat sehingga harus diaktifkan).
+- `interface.fileSearch: false` — dinonaktifkan sampai embedding provider
+  dikonfigurasi.
 
 ### File yang di-ignore Git
 
@@ -252,6 +299,32 @@ Sengaja dinonaktifkan (`interface.fileSearch: false`) karena RAG API
 membutuhkan embedding provider. Set `RAG_OPENAI_API_KEY` (atau backend
 embedding lain), ubah `fileSearch: true`, lalu restart.
 
+**Skill atau plugin tidak muncul**
+
+Pastikan `skill/` dan `plugin/` ter-mount dan API sudah direstart:
+
+```bash
+docker compose restart api
+docker logs semar-gpt-api 2>&1 | grep -E "agentPlugins|deploymentSkills"
+```
+
+Jika ada plugin yang ditolak, log `[agentPlugins]` menyebut nama file dan
+alasannya. Jalankan validator untuk melihat semua masalah sekaligus:
+
+```bash
+node scripts/check-skills.mjs
+```
+
+Penyebab umum: `plugin.json` tidak valid, `$schema` salah, nama skill
+duplikat, atau `SKILL.md` melewati batas 100.000 karakter.
+
+**Scheduled task tidak berjalan**
+
+Pastikan `interface.schedules` ada di `librechat.yaml` dan
+`SCHEDULES_SINGLE_PROCESS=true` di `.env`. Cek log `[schedules] engine
+started`. Deployment multi-proses tidak boleh memakai
+`SCHEDULES_SINGLE_PROCESS=true`.
+
 **Izin file di Linux**
 
 Jika container tidak bisa menulis `./uploads`, sesuaikan `UID`/`GID` di `.env`
@@ -270,11 +343,18 @@ dengan `id -u` dan `id -g`, lalu restart.
 │   ├── index.html               # judul & meta SEMAR-GPT
 │   └── vite.config.ts           # manifest PWA
 ├── packages/                    # backend, data-provider, shared UI
-├── librechat.yaml               # branding, tema, endpoint
+├── skill/                       # 3 deployment skill (skill-creator, learn, plugin-creator)
+├── plugin/                      # 10 Agent Plugin hasil adaptasi Cindy (30 skill)
+├── docs/cindy-integration.md    # peta fitur, batasan, dan provenance Cindy
+├── scripts/
+│   ├── semar.sh                 # helper start/stop/logs
+│   ├── check-skills.mjs         # validator skill & plugin
+│   └── import-cindy.mjs         # importer reproducible dari checkout Cindy
+├── librechat.yaml               # branding, tema, endpoint, fitur
 ├── .env                         # secret & konfigurasi lokal (jangan di-commit)
 ├── docker-compose.yml           # stack upstream
-├── docker-compose.override.yml  # project name, container name, mount config
-├── scripts/semar.sh             # helper start/stop/logs
+├── docker-compose.override.yml  # project name, container name, mount config/skill/plugin
+├── CINDY-LICENSE.txt            # lisensi Apache-2.0 material Cindy
 └── README.SEMAR-GPT.md          # dokumen ini
 ```
 
@@ -286,3 +366,9 @@ SEMAR-GPT dibangun di atas LibreChat, proyek open source MIT. Logo dan nama
 SEMAR-GPT adalah branding deployment ini; kode dasar tetap milik para
 kontributor LibreChat. Lihat [LICENSE](LICENSE) dan
 [README.md](README.md) untuk dokumentasi upstream.
+
+Skill dan Agent Plugin di `skill/` dan `plugin/` merupakan adaptasi dari
+proyek [Cindy](https://github.com/makecindy/cindy) yang dilisensikan
+Apache-2.0. Salinan lisensi ada di
+[`CINDY-LICENSE.txt`](CINDY-LICENSE.txt); setiap `plugin.json` mencantumkan
+sumber dan lisensi asalnya.

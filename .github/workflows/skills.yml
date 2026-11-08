@@ -1,0 +1,29 @@
+name: Validate skills and Agent Plugins
+
+on:
+  push:
+    paths:
+      - 'skill/**'
+      - 'plugin/**'
+      - 'scripts/check-skills.mjs'
+      - 'scripts/import-cindy.mjs'
+  pull_request:
+    paths:
+      - 'skill/**'
+      - 'plugin/**'
+      - 'scripts/check-skills.mjs'
+      - 'scripts/import-cindy.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24.22.1'
+      - run: node scripts/check-skills.mjs
